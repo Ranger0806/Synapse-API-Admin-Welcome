@@ -1,0 +1,4 @@
+homeserver_url: "https://your-synapse.example"
+access_token: "replace-with-admin-token"
+db_path: "users.db"
+
