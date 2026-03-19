@@ -58,7 +58,7 @@ class MessagePayload(TypedDict):
     """Структура YAML-сообщения для отправки server notice."""
 
     body: str
-    formatted_body: str
+    formated_body: str
 
 
 def read_message(message_path: str) -> MessagePayload:
@@ -68,7 +68,7 @@ def read_message(message_path: str) -> MessagePayload:
         message_path: Путь к YAML-файлу с полями `body` и `formated_body`.
 
     Returns:
-        Словарь с `body` и `formatted_body`.
+        Словарь с `body` и `formated_body`.
 
     Raises:
         FileNotFoundError: Если файл не найден.
@@ -85,13 +85,12 @@ def read_message(message_path: str) -> MessagePayload:
         raise ValueError("Некорректный формат файла сообщения: ожидается YAML-объект")
 
     body = str(payload.get("body", "")).strip()
-    # Поддерживаем и formated_body, и formatted_body, чтобы не ломать существующие файлы.
-    formatted = str(payload.get("formated_body") or payload.get("formatted_body") or body).strip()
+    formated = str(payload.get("formated_body") or body).strip()
 
     if not body:
         raise ValueError("В файле сообщения не задано поле body")
 
-    return {"body": body, "formatted_body": formatted}
+    return {"body": body, "formated_body": formated}
 
 
 async def _request_json(
@@ -152,7 +151,7 @@ async def send_server_notice(client: httpx.AsyncClient, user_id: str, message: M
             "msgtype": "m.text",
             "body": message["body"],
             "format": "org.matrix.custom.html",
-            "formatted_body": message["formatted_body"],
+            "formatted_body": message["formated_body"],
         },
     }
     await _request_json(
