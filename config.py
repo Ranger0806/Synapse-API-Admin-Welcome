@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 
 
-DEFAULT_CONFIG_PATH = Path("config.yml")
+DEFAULT_CONFIG_PATH = Path("config.yaml")
 
 
 @dataclass
