@@ -6,10 +6,10 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 cd "$ROOT_DIR"
 
-if [ -f ".venv/bin/activate" ]; then
-	source ".venv/bin/activate"
-elif [ -f ".venv/Scripts/activate" ]; then
-	source ".venv/Scripts/activate"
+if [ -f "$ROOT_DIR/.venv/bin/activate" ]; then
+	source "$ROOT_DIR/.venv/bin/activate"
+elif [ -f "$ROOT_DIR/.venv/Scripts/activate" ]; then
+	source "$ROOT_DIR/.venv/Scripts/activate"
 else
 	echo "Error: .venv activation script not found (.venv/bin/activate or .venv/Scripts/activate)." >&2
 	exit 1
